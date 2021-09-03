@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class Spring5PetClinicApplication
+open class Spring5PetClinicApplication
 
 fun main(args: Array<String>) {
 	runApplication<Spring5PetClinicApplication>(*args)
