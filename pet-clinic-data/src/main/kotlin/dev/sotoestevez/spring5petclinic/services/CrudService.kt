@@ -4,9 +4,9 @@ interface CrudService<T, ID> {
 
 	fun findAll(): Set<T>
 
-	fun findById(id: ID): T
+	fun findById(id: ID): T?
 
-	fun save(entity: T): Unit
+	fun save(entity: T): T
 
 	fun delete(entity: T): Unit
 
