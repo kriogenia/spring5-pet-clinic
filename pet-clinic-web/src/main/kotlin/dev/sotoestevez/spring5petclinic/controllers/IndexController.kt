@@ -10,7 +10,7 @@ class IndexController {
 		private const val INDEX = "index"
 	}
 
-	@RequestMapping("", "/", "index", "index.html")
+	@RequestMapping("", "/", "/${INDEX}", "/${INDEX}.html")
 	fun index(): String = INDEX
 
 }
