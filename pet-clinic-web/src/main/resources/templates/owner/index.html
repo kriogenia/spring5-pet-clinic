@@ -6,5 +6,21 @@
 </head>
 <body>
     <h1>Owners</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        </thead>
+        <!--/*@thymesVar id="owner" type="dev.sotoestevez.spring5petclinic.model.Owner"*/-->
+        <!--/*@thymesVar id="owners" type="java.util.Set"*/-->
+        <tr th:each="owner: ${owners}">
+            <td th:text="${owner.id}"></td>
+            <td th:text="${owner.firstName}"></td>
+            <td th:text="${owner.lastName}"></td>
+        </tr>
+    </table>
 </body>
 </html>

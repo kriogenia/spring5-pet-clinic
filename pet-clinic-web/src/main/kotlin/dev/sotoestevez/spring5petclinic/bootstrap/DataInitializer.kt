@@ -19,14 +19,14 @@ class DataInitializer(
 	private val faker: Faker = Faker()
 
 	override fun run(vararg args: String?) {
-		println("Starting data load")
+		println("# DataInitializer: --- Starting data load ---")
 		for (i in 0..5) {
 			val owner = Owner(faker.name().firstName(), faker.name().lastName())
-			ownerService.save(owner.apply { id = faker.number().randomNumber() })
+			ownerService.save(owner.apply { id = faker.number().randomNumber(4, true) })
 			val vet = Vet(faker.name().firstName(), faker.name().lastName())
-			vetService.save(vet.apply { id = faker.number().randomNumber() })
+			vetService.save(vet.apply { id = faker.number().randomNumber(4, true) })
 		}
-		println("Finished data loading")
+		println("# DataInitializer: --- Finished data loading ---")
 	}
 
 }
