@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Vets</title>
 </head>
 <body>
-    <h1>List of vets</h1>
+    <h1>Vets</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        </thead>
+        <!--/*@thymesVar id="vet" type="dev.sotoestevez.spring5petclinic.model.Vet"*/-->
+        <!--/*@thymesVar id="vets" type="java.util.Set"*/-->
+        <tr th:each="vet: ${vets}">
+            <td th:text="${vet.id}"></td>
+            <td th:text="${vet.firstName}"></td>
+            <td th:text="${vet.lastName}"></td>
+        </tr>
+    </table>
 </body>
 </html>
