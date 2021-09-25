@@ -9,7 +9,7 @@ open class BaseEntity: Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	var id: Long = -1
+	var id: Long = -1L
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true

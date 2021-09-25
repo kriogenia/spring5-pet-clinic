@@ -22,9 +22,9 @@ class DataInitializer(
 		println("# DataInitializer: --- Starting data load ---")
 		for (i in 0..5) {
 			val owner = Owner(faker.name().firstName(), faker.name().lastName())
-			ownerService.save(owner.apply { id = faker.number().randomNumber(4, true) })
+			ownerService.save(owner)
 			val vet = Vet(faker.name().firstName(), faker.name().lastName())
-			vetService.save(vet.apply { id = faker.number().randomNumber(4, true) })
+			vetService.save(vet)
 		}
 		println("# DataInitializer: --- Finished data loading ---")
 	}
