@@ -6,7 +6,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/vet")
+@RequestMapping("/vets")
 class VetController(
 	private val service: VetService
 ) {
@@ -17,7 +17,7 @@ class VetController(
 		private const val VETS = "vets"
 	}
 
-	@RequestMapping("", "/", "/${INDEX}", "/${INDEX}.html")
+	@RequestMapping("", ".html", "/${INDEX}", "/${INDEX}.html")
 	fun list(model: Model): String {
 		model.addAttribute(VETS, service.findAll())
 		return ROOT + INDEX
