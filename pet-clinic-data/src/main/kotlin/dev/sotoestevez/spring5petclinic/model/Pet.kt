@@ -1,6 +1,5 @@
 package dev.sotoestevez.spring5petclinic.model
 
-import org.springframework.core.style.ToStringCreator
 import java.lang.IllegalStateException
 import java.time.LocalDateTime
 
@@ -16,9 +15,6 @@ class Pet(
 			mOwner = value
 		}
 	private var mOwner: Owner? = null
-
-	override fun toString(): String = ToStringCreator(this).append("name", this.name)
-		.append("type", this.petType).toString()
 
 }
 

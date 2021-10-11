@@ -17,7 +17,7 @@ class VetController(
 		private const val VETS = "vets"
 	}
 
-	@RequestMapping("", ".html", "/${INDEX}", "/${INDEX}.html")
+	@RequestMapping("", "/${INDEX}", "/${INDEX}.html")
 	fun list(model: Model): String {
 		model.addAttribute(VETS, service.findAll())
 		return ROOT + INDEX

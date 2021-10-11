@@ -8,8 +8,10 @@ interface CrudService<T, ID> {
 
 	fun save(entity: T): T
 
-	fun delete(entity: T): Unit
+	fun delete(entity: T): T?
 
-	fun deleteById(id: ID): Unit
+	fun deleteById(id: ID): T?
+
+	fun count(): Int
 
 }

@@ -14,6 +14,7 @@ class OwnerController(
 	companion object {
 		private const val ROOT = "owner/"
 		private const val INDEX = "index"
+		private const val FIND = "find"
 		private const val OWNERS = "owners"
 	}
 
@@ -21,6 +22,11 @@ class OwnerController(
 	fun list(model: Model): String {
 		model.addAttribute(OWNERS, ownerService.findAll())
 		return ROOT + INDEX
+	}
+
+	@RequestMapping(FIND)
+	fun find(): String {
+		return "notimplemented"
 	}
 
 }

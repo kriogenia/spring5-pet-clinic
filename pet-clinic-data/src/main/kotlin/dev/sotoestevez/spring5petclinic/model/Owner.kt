@@ -14,4 +14,6 @@ data class Owner(
 
 	fun addPet(pet: Pet) = mPets.add(pet)
 
+	val fullName = "$firstName $lastName"
+
 }

@@ -21,12 +21,12 @@
         <!--/*@thymesVar id="owners" type="java.util.Set"*/-->
         <tr th:each="owner : ${owners}">
             <td>
-                <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"></a>
+                <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.fullName}"></a>
             </td>
-    <!--        <td th:text="${owner.address}"></td>
+            <td th:text="${owner.address}"></td>
             <td th:text="${owner.city}"></td>
             <td th:text="${owner.telephone}"></td>
-            <td><span th:text="${#strings.listJoin(owner.pets, ', ')}"></span></td>-->
+            <td><span th:text="${#strings.listJoin(owner.pets, ', ')}"></span></td>
         </tr>
         </tbody>
     </table>

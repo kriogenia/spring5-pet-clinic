@@ -22,14 +22,22 @@ class DataInitializer(
 
 	private val faker: Faker = Faker()
 
+	private val specialties: List<Specialty> = listOf(
+		Specialty("radiology"), Specialty("surgery"), Specialty("dentistry")
+	)
+
 	override fun run(vararg args: String?) {
+		if (petService.findPetTypes().isEmpty()) loadData()
+	}
+
+	private fun loadData() {
 		println("# DataInitializer: ----- Starting data load ----")
-		for (i in 0..5) {
+		for (i in 1..5) {
 			val owner = Owner(
 				faker.name().firstName(), faker.name().lastName(), faker.address().streetAddress(),
 				faker.address().city(), faker.phoneNumber().cellPhone()
 			)
-			for (j in 0..(1..3).random())
+			for (j in 1..(1..3).random())
 				owner.addPet(
 					Pet(
 						faker.funnyName().name(), PetType(faker.animal().name()),
@@ -39,8 +47,7 @@ class DataInitializer(
 			ownerService.save(owner)
 
 			val vet = Vet(faker.name().firstName(), faker.name().lastName())
-			for (j in 0..(1..3).random())
-				vet.addSpecialty(Specialty(faker.animal().name()))
+			for (j in 1..(0..2).random()) vet.addSpecialty(specialties[(0..specialties.size).random()])
 			vetService.save(vet)
 		}
 		println("# DataInitializer: --- Finished data loading ---")
@@ -52,7 +59,6 @@ class DataInitializer(
 		petService.findPetTypes().forEach { println(it) }
 		println("# DataInitializer: ------------ Vets -----------")
 		vetService.findAll().forEach { println(it) }
-
 	}
 
 	private fun toLocalDateTime(date: Date) = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()

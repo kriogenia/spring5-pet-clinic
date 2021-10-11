@@ -11,6 +11,9 @@ data class Vet(
 
 	fun addSpecialty(specialty: Specialty) = mSpecialty.add(specialty)
 
+	val numberOfSpecialties
+		get() = specialties.size
+
 }
 
 class Specialty(name: String) : NamedEntity(name)

@@ -19,9 +19,9 @@ abstract class AbstractMapService<T : BaseEntity> : CrudService<T, Long> {
 
 	override fun delete(entity: T) = this.deleteById(entity.id)
 
-	override fun deleteById(id: Long) {
-		map.remove(id)
-	}
+	override fun deleteById(id: Long) = map.remove(id)
+
+	override fun count(): Int = findAll().size
 
 	protected fun <S : BaseEntity> saveOnMap(entity: S, map: MutableMap<Long, S>): S {
 		if (entity.isNew) entity.id = getNextId(map)

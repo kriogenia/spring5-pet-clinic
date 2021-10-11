@@ -5,24 +5,25 @@
     <title th:text="#{vets}">Vets</title>
 </head>
 <body>
-    <h2 th:text="#{vets}">Vets</h2>
-    <table id="vets" class="table table-striped">
-        <thead>
-        <tr>
-            <th th:text="#{name}">Name</th>
-            <th th:text="#{specialties}">Specialties</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!--/*@thymesVar id="vet" type="dev.sotoestevez.spring5petclinic.model.Vet"*/-->
-        <!--/*@thymesVar id="vets" type="java.util.Set"*/-->
-        <tr th:each="vet : ${vets}">
-            <td th:text="${vet.firstName + ' ' + vet.lastName}"></td>
-        <!--    <td><span th:each="specialty : ${vet.specialties}"
-                      th:text="${specialty.name + ' '}"/> <span
-                    th:if="${vet.nrOfSpecialties == 0}">none</span></td>-->
-        </tr>
-        </tbody>
-    </table>
+<h2 th:text="#{vets}">Vets</h2>
+<table id="vets" class="table table-striped">
+    <thead>
+    <tr>
+        <th th:text="#{name}">Name</th>
+        <th th:text="#{specialties}">Specialties</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--/*@thymesVar id="vet" type="dev.sotoestevez.spring5petclinic.model.Vet"*/-->
+    <!--/*@thymesVar id="vets" type="java.util.Set"*/-->
+    <tr th:each="vet : ${vets}">
+        <td th:text="${vet.firstName + ' ' + vet.lastName}"></td>
+        <td>
+            <span th:each="specialty : ${vet.specialties}" th:text="${specialty.name + ' '}"></span>
+            <span th:if="${vet.numberOfSpecialties == 0}">none</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
