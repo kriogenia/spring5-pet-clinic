@@ -7,19 +7,15 @@ import kotlin.NoSuchElementException
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
-abstract class AbstractMapService<T: BaseEntity>: CrudService<T, Long> {
+abstract class AbstractMapService<T : BaseEntity> : CrudService<T, Long> {
 
 	protected val map: MutableMap<Long, T> = HashMap()
 
-	override fun findAll(): Set<T> =  HashSet(map.values)
+	override fun findAll(): Set<T> = HashSet(map.values)
 
 	override fun findById(id: Long): T? = map[id]
 
-	override fun save(entity: T): T {
-		if (entity.id == -1L) entity.id = getNextId()
-		map[entity.id] = entity
-		return entity
-	}
+	override fun save(entity: T): T = saveOnMap(entity, map)
 
 	override fun delete(entity: T) = this.deleteById(entity.id)
 
@@ -27,8 +23,18 @@ abstract class AbstractMapService<T: BaseEntity>: CrudService<T, Long> {
 		map.remove(id)
 	}
 
-	private fun getNextId(): Long {
-		return try { Collections.max(map.keys) + 1 } catch (exception: NoSuchElementException) { 0L }
+	protected fun <S : BaseEntity> saveOnMap(entity: S, map: MutableMap<Long, S>): S {
+		if (entity.isNew) entity.id = getNextId(map)
+		map[entity.id] = entity
+		return entity
+	}
+
+	private fun getNextId(map: Map<Long, Any>): Long {
+		return try {
+			Collections.max(map.keys) + 1
+		} catch (exception: NoSuchElementException) {
+			0L
+		}
 	}
 
 }

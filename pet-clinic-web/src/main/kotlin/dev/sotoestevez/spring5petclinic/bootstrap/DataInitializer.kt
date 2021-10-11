@@ -1,10 +1,7 @@
 package dev.sotoestevez.spring5petclinic.bootstrap
 
 import com.github.javafaker.Faker
-import dev.sotoestevez.spring5petclinic.model.Owner
-import dev.sotoestevez.spring5petclinic.model.Pet
-import dev.sotoestevez.spring5petclinic.model.PetType
-import dev.sotoestevez.spring5petclinic.model.Vet
+import dev.sotoestevez.spring5petclinic.model.*
 import dev.sotoestevez.spring5petclinic.services.OwnerService
 import dev.sotoestevez.spring5petclinic.services.PetService
 import dev.sotoestevez.spring5petclinic.services.VetService
@@ -21,22 +18,29 @@ class DataInitializer(
 	private val ownerService: OwnerService,
 	private val petService: PetService,
 	private val vetService: VetService,
-): CommandLineRunner {
+) : CommandLineRunner {
 
 	private val faker: Faker = Faker()
 
 	override fun run(vararg args: String?) {
 		println("# DataInitializer: ----- Starting data load ----")
 		for (i in 0..5) {
-
-			val owner = Owner(faker.name().firstName(), faker.name().lastName(), faker.address().streetAddress(),
-				faker.address().city(), faker.phoneNumber().cellPhone())
+			val owner = Owner(
+				faker.name().firstName(), faker.name().lastName(), faker.address().streetAddress(),
+				faker.address().city(), faker.phoneNumber().cellPhone()
+			)
+			for (j in 0..(1..3).random())
+				owner.addPet(
+					Pet(
+						faker.funnyName().name(), PetType(faker.animal().name()),
+						toLocalDateTime(faker.date().birthday(0, 15))
+					)
+				)
 			ownerService.save(owner)
 
-			val pet = Pet(PetType(faker.animal().name()), owner, toLocalDateTime(faker.date().birthday(0, 15)))
-			petService.save(pet)
-
 			val vet = Vet(faker.name().firstName(), faker.name().lastName())
+			for (j in 0..(1..3).random())
+				vet.addSpecialty(Specialty(faker.animal().name()))
 			vetService.save(vet)
 		}
 		println("# DataInitializer: --- Finished data loading ---")

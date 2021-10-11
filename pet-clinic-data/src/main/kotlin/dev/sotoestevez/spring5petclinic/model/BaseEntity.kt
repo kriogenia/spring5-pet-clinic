@@ -5,11 +5,13 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-open class BaseEntity: Serializable {
+open class BaseEntity : Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	var id: Long = -1L
+
+	val isNew: Boolean = id == -1L
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
@@ -26,7 +28,13 @@ open class BaseEntity: Serializable {
 
 }
 
+open class NamedEntity(val name: String) : BaseEntity() {
+
+	override fun toString(): String = name
+
+}
+
 open class Person(
 	open val firstName: String,
 	open val lastName: String
-): BaseEntity()
+) : BaseEntity()

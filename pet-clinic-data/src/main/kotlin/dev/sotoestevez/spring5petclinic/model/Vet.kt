@@ -1,16 +1,16 @@
 package dev.sotoestevez.spring5petclinic.model
 
 data class Vet(
-		override val firstName: String,
-		override val lastName: String
-): Person(firstName, lastName) {
+	override val firstName: String,
+	override val lastName: String
+) : Person(firstName, lastName) {
 
-	val specialty: Set<Specialty>
+	val specialties: Set<Specialty>
 		get() = mSpecialty
 	private val mSpecialty: MutableSet<Specialty> = mutableSetOf()
 
+	fun addSpecialty(specialty: Specialty) = mSpecialty.add(specialty)
+
 }
 
-data class Specialty(
-	val name: String
-): BaseEntity()
+class Specialty(name: String) : NamedEntity(name)
