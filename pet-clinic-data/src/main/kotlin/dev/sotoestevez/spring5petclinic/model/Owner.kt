@@ -2,7 +2,10 @@ package dev.sotoestevez.spring5petclinic.model
 
 data class Owner(
 		override val firstName: String,
-		override val lastName: String
+		override val lastName: String,
+		val address: String,
+		val city: String,
+		val telephone: String
 ): Person(firstName, lastName) {
 
 	val pets: Set<Pet>

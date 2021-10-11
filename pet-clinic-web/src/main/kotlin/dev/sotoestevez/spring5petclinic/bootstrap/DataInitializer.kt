@@ -21,7 +21,8 @@ class DataInitializer(
 	override fun run(vararg args: String?) {
 		println("# DataInitializer: --- Starting data load ---")
 		for (i in 0..5) {
-			val owner = Owner(faker.name().firstName(), faker.name().lastName())
+			val owner = Owner(faker.name().firstName(), faker.name().lastName(), faker.address().fullAddress(),
+				faker.address().city(), faker.phoneNumber().phoneNumber())
 			ownerService.save(owner)
 			val vet = Vet(faker.name().firstName(), faker.name().lastName())
 			vetService.save(vet)
