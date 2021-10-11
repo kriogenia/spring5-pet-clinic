@@ -25,3 +25,8 @@ open class BaseEntity: Serializable {
 	}
 
 }
+
+open class Person(
+	open val firstName: String,
+	open val lastName: String
+): BaseEntity()
