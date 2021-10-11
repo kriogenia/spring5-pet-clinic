@@ -8,6 +8,4 @@ data class Pet(
 		val birthDate: LocalDateTime
 ): BaseEntity()
 
-enum class PetType {
-
-}
+data class PetType(val name: String): BaseEntity()
