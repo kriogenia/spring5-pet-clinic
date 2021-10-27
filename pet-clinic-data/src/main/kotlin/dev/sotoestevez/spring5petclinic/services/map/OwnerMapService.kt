@@ -13,7 +13,6 @@ class OwnerMapService(
 
 	override fun save(entity: Owner): Owner {
 		entity.pets.forEach {
-			it.owner = entity
 			petService.save(it)
 		}
 		return super.save(entity)

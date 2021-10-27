@@ -1,21 +1,35 @@
 package dev.sotoestevez.spring5petclinic.model
 
-import java.lang.IllegalStateException
-import java.time.LocalDateTime
+import org.springframework.format.annotation.DateTimeFormat
+import java.time.LocalDate
+import javax.persistence.*
 
+@Entity
+@Table(name = "pets")
 class Pet(
 	name: String,
+
+	@ManyToOne
+	@JoinColumn(name = "type_id")
 	var petType: PetType,
-	val birthDate: LocalDateTime
+
+	@Column(name = "birth_date")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	val birthDate: LocalDate
 ) : NamedEntity(name) {
 
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private var _owner: Owner? = null
+
 	var owner: Owner
-		get() = mOwner ?: throw IllegalStateException("Pet owner is required")
+		get() = _owner ?: throw IllegalStateException("Pet owner is required")
 		set(value) {
-			mOwner = value
+			_owner = value
 		}
-	private var mOwner: Owner? = null
 
 }
 
+@Entity
+@Table(name = "types")
 class PetType(name: String) : NamedEntity(name)

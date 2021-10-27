@@ -1,8 +1,8 @@
 package dev.sotoestevez.spring5petclinic.model
 
-data class Vet(
-	override val firstName: String,
-	override val lastName: String
+class Vet(
+	firstName: String,
+	lastName: String
 ) : Person(firstName, lastName) {
 
 	val specialties: Set<Specialty>

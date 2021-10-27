@@ -17,7 +17,7 @@ abstract class AbstractMapService<T : BaseEntity> : CrudService<T, Long> {
 
 	override fun save(entity: T): T = saveOnMap(entity, map)
 
-	override fun delete(entity: T) = this.deleteById(entity.id)
+	override fun delete(entity: T) = entity.id?.let { this.deleteById(it) }
 
 	override fun deleteById(id: Long) = map.remove(id)
 
@@ -25,7 +25,7 @@ abstract class AbstractMapService<T : BaseEntity> : CrudService<T, Long> {
 
 	protected fun <S : BaseEntity> saveOnMap(entity: S, map: MutableMap<Long, S>): S {
 		if (entity.isNew) entity.id = getNextId(map)
-		map[entity.id] = entity
+		map[entity.id!!] = entity
 		return entity
 	}
 

@@ -1,31 +1,38 @@
 package dev.sotoestevez.spring5petclinic.model
 
 import java.io.Serializable
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.MappedSuperclass
+import javax.persistence.*
+import javax.validation.constraints.NotEmpty
 
 @MappedSuperclass
-open class BaseEntity : Serializable {
-
+open class BaseEntity(
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	var id: Long = -1L
+	var id: Long? = null
+) : Serializable {
 
-	val isNew: Boolean = id == -1L
+	val isNew: Boolean
+		get() = this.id == null
 
 }
 
 @MappedSuperclass
-open class NamedEntity(val name: String) : BaseEntity() {
+open class NamedEntity(
+	@Column(name = "name")
+	var name: String? = null
+) : BaseEntity() {
 
-	override fun toString(): String = name
+	override fun toString(): String = name ?: super.toString()
 
 }
 
 @MappedSuperclass
 open class Person(
-	open val firstName: String,
-	open val lastName: String
+	@Column(name = "first_name")
+	@NotEmpty
+	var firstName: String = "",
+
+	@Column(name = "last_name")
+	@NotEmpty
+	var lastName: String = ""
 ) : BaseEntity()

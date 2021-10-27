@@ -41,13 +41,13 @@ class DataInitializer(
 				owner.addPet(
 					Pet(
 						faker.funnyName().name(), PetType(faker.animal().name()),
-						toLocalDateTime(faker.date().birthday(0, 15))
+						toLocalDate(faker.date().birthday(0, 15))
 					)
 				)
 			ownerService.save(owner)
 
 			val vet = Vet(faker.name().firstName(), faker.name().lastName())
-			for (j in 1..(0..2).random()) vet.addSpecialty(specialties[(0..specialties.size).random()])
+			for (j in 1..(1..2).random()) vet.addSpecialty(specialties[(specialties.indices).random()])
 			vetService.save(vet)
 		}
 		println("# DataInitializer: --- Finished data loading ---")
@@ -61,6 +61,6 @@ class DataInitializer(
 		vetService.findAll().forEach { println(it) }
 	}
 
-	private fun toLocalDateTime(date: Date) = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+	private fun toLocalDate(date: Date) = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
 
 }
